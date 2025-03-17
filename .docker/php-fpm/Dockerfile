@@ -1,4 +1,4 @@
-FROM php:8.3.8-fpm-bullseye
+FROM php:8.4.5-fpm-bullseye
 
 ARG TIMEZONE
 
@@ -38,7 +38,7 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 
 RUN docker-php-ext-install pdo pdo_mysql zip xsl gd intl opcache exif mbstring
 
-RUN pecl install xdebug-3.3.0
+RUN pecl install xdebug-3.4.2
 RUN docker-php-ext-enable xdebug
 
 # Set timezone
