@@ -1,0 +1,29 @@
+
+services:
+  php:
+    container_name: stayforlong-php-fpm
+    build:
+      context: .
+      dockerfile: .docker/php-fpm/Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        LOCAL_USER: ${LOCAL_USER}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ${APP_CODE_PATH}:${APP_WEB_ROOT}
+    environment:
+      - PHP_IDE_CONFIG=serverName=stayforlong.test
+      - PHP_XDEBUG_MODE=${XDEBUG_MODE:-off}
+      - PHP_XDEBUG_REMOTE_HOST=host.docker.internal
+  nginx:
+    container_name: stayforlong-nginx
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    volumes:
+      - ${APP_CODE_PATH}:${APP_WEB_ROOT}
+    ports:
+      - 8080:80
