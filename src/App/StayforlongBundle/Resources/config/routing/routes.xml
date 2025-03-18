@@ -4,4 +4,7 @@
         xsi:schemaLocation="http://symfony.com/schema/routing
         https://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <route id="booking_stats" path="/stats" methods="POST"
+           controller="App\StayforlongBundle\Controller\GetStatsController"  />
+
 </routes>

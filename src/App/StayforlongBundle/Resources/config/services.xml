@@ -2,14 +2,28 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="services/bus.xml"/>
-    </imports>
     <services>
-        <defaults autowire="true"/>
+        <defaults autowire="true" />
+
+        <!-- APPLICATION SERVICES -->
+        <service id="stayforlong.booking.application.calculate_stats"
+                 class="Stayforlong\Booking\Application\CalculateStats">
+            <argument type="service" id="stayforlong.booking.domain.stats_calculator"/>
+        </service>
+
+        <!-- DOMAIN SERVICES -->
+        <service id="stayforlong.booking.domain.stats_calculator" class="Stayforlong\Booking\Domain\StatsCalculator" />
 
         <!-- CONTROLLERS -->
+        <service id="App\StayforlongBundle\Controller\GetStatsController">
+            <argument type="service" id="stayforlong.booking.application.calculate_stats"/>
+            <argument type="service" id="stayforlong.booking.infrastructure.stats_request_validator" />
+            <argument type="service" id="logger" />
+            <tag name="controller.service_arguments" />
+        </service>
 
-        <!-- SERVICES APPLICATION -->
+        <service id="stayforlong.booking.infrastructure.stats_request_validator"
+                 class="Stayforlong\Booking\Infrastructure\StatsRequestValidator">
+        </service>
     </services>
 </container>

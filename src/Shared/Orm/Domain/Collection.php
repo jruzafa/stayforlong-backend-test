@@ -8,8 +8,7 @@ use IteratorAggregate;
 
 abstract class Collection implements Countable, IteratorAggregate
 {
-    /** @var array */
-    private $items;
+    protected array $items;
 
     public function __construct(array $items)
     {
@@ -19,22 +18,17 @@ abstract class Collection implements Countable, IteratorAggregate
 
     abstract protected function type(): string;
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new ArrayIterator($this->items());
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->items());
     }
 
-    protected function each(callable $fn)
-    {
-        each($fn, $this->items());
-    }
-
-    protected function items()
+    protected function items(): array
     {
         return $this->items;
     }
@@ -43,7 +37,7 @@ abstract class Collection implements Countable, IteratorAggregate
     {
         foreach ($items as $item) {
             if (get_class($item) !== $this->type()) {
-                throw new \InvalidArgumentException('Item not instace from type class');
+                throw new \InvalidArgumentException('Item not instance from type class');
             }
         }
     }

@@ -1,4 +1,4 @@
 WorkBundle:
     resource: '@StayforlongBundle/Resources/config/routing'
     type: directory
-    prefix: /api/v1/
+    prefix: /api/v1/booking

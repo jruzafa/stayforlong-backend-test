@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Tests\Unit\Stayforlong\Booking\Domain;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+use Stayforlong\Booking\Domain\BookingCollection;
+use Stayforlong\Booking\Domain\StatsCalculator;
+use Stayforlong\Booking\Domain\StatsResume;
+
+class StatsCalculatorTest extends TestCase
+{
+    private StatsCalculator $statsCalculator;
+
+    protected function setUp(): void
+    {
+        $this->statsCalculator = new StatsCalculator();
+    }
+
+    public function testGivenEmptyCollectionWhenCalculateThenZeroReturned()
+    {
+        $statsCalculator = new StatsCalculator();
+        $collection = new BookingCollection([]);
+
+        $statsResume = $statsCalculator->calculate($collection);
+
+        $this->assertEquals(0, $statsResume->avg());
+        $this->assertEquals(0, $statsResume->min());
+        $this->assertEquals(0, $statsResume->max());
+    }
+
+    #[DataProvider('dataProviderBookingRequest')]
+    public function testGivenSomeCasesWhenCalculateThenExpectedStatsReturned(BookingCollection $bookingCollection, StatsResume $expectedStatsResume)
+    {
+        $statsResumeCalculated = $this->statsCalculator->calculate($bookingCollection);
+
+        self::assertEqualsWithDelta($expectedStatsResume->avg(), $statsResumeCalculated->avg(), 0.01);
+        self::assertEqualsWithDelta($expectedStatsResume->min(), $statsResumeCalculated->min(), 0.01);
+        self::assertEqualsWithDelta($expectedStatsResume->max(), $statsResumeCalculated->max(), 0.01);
+    }
+
+    public static function dataProviderBookingRequest(): array
+    {
+        return [
+            'case 1' => [BookingCollectionMother::case1(), StatsResumeMother::case1()],
+            'case 2' => [BookingCollectionMother::case2(), StatsResumeMother::case2()]
+        ];
+    }
+}
