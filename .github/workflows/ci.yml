@@ -5,6 +5,8 @@ jobs:
   run-test:
     name: Run testsuite
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
     steps:
       - uses: actions/checkout@v4
 
@@ -16,13 +18,8 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v6
-        with:
-          args: --no-scripts
 
       - run: echo "Composer dependencies have been installed"
 
-      - uses: php-actions/phpunit@v4
-        with:
-          php_version: "8.4.5"
-          php_extensions: ctype iconv
-          configuration: phpunit.xml.dist
+      - name: Run unit test
+        run: vendor/bin/phpunit --testsuite Unit
