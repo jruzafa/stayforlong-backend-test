@@ -16,12 +16,10 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v6
-        with:
-          php_version: "8.4.5"
-          version: "2.8.6"
-          php_extensions: ctype iconv
 
       - run: echo "Composer dependencies have been installed"
 
-      - name: Run unit test
-        run: vendor/bin/phpunit --testsuite Unit
+      - uses: php-actions/phpunit@v4
+        with:
+          php_version: "8.4.5"
+          php_extensions: ctype iconv
