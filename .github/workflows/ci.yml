@@ -16,6 +16,8 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v6
+        with:
+          args: --no-scripts
 
       - run: echo "Composer dependencies have been installed"
 
