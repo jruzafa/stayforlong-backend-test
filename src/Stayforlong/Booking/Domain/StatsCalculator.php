@@ -8,26 +8,28 @@ final readonly class StatsCalculator
 {
     public function calculate(BookingCollection $bookingRequestCollection): StatsResume
     {
-        $total = 0;
+        $totalProfit = 0;
         $min = PHP_INT_MAX;
         $max = 0;
 
         /** @var Booking $booking */
         foreach ($bookingRequestCollection as $booking) {
-            $total += $booking->nonProfit();
-            $min = min($min, $booking->nonProfit());
-            $max = max($max, $booking->nonProfit());
+            $totalProfit += $booking->profit();
+
+            if ($min > $booking->profit()) {
+                $min = $booking->profit();
+            }
+
+            if ($max < $booking->profit()) {
+                $max = $booking->profit();
+            }
         }
 
-        if ($total === 0) {
-            return new StatsResume(
-                avg: 0,
-                min: 0,
-                max: 0
-            );
+        if ($totalProfit === 0) {
+            return StatsResume::empty();
         }
 
-        $avg = $total / $bookingRequestCollection->count();
+        $avg = $totalProfit / $bookingRequestCollection->count();
 
         return new StatsResume(
             avg: $avg,

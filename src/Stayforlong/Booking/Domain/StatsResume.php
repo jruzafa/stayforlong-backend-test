@@ -22,4 +22,9 @@ final class StatsResume
     {
         return $this->max;
     }
+
+    public static function empty(): self
+    {
+        return new self(0, 0, 0);
+    }
 }
