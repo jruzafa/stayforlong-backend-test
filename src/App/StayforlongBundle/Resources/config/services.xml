@@ -9,6 +9,7 @@
         <service id="stayforlong.booking.application.calculate_stats"
                  class="Stayforlong\Booking\Application\CalculateStats">
             <argument type="service" id="stayforlong.booking.domain.stats_calculator"/>
+            <argument type="service" id="stayforlong.booking.domain.booking_collection_factory"/>
         </service>
 
         <service id="stayforlong.booking.application.calculate_maximize_booking"

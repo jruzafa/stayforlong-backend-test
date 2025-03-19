@@ -33,9 +33,7 @@ final class GetStatsController
     {
         try {
             $collectionBookingRequest = $request->getContent();
-
-            // todo: validate json decode errors
-            $collectionBookingRequest = json_decode($collectionBookingRequest, true);
+            $collectionBookingRequest = json_decode($collectionBookingRequest, true, JSON_THROW_ON_ERROR);
 
             $this->statsRequestValidator->validate($collectionBookingRequest);
 

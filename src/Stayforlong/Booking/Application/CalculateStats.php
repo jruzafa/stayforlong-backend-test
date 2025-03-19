@@ -4,35 +4,19 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Application;
 
-use Stayforlong\Booking\Domain\Booking;
-use Stayforlong\Booking\Domain\BookingCollection;
-use Stayforlong\Booking\Domain\CheckIn;
-use Stayforlong\Booking\Domain\Margin;
-use Stayforlong\Booking\Domain\Nights;
-use Stayforlong\Booking\Domain\RequestId;
-use Stayforlong\Booking\Domain\SellingRate;
+use Stayforlong\Booking\Domain\BookingCollectionFactory;
 use Stayforlong\Booking\Domain\StatsCalculator;
 
 final readonly class CalculateStats
 {
-    public function __construct(private StatsCalculator $statsCalculator) { }
+    public function __construct(
+        private StatsCalculator $statsCalculator,
+        private BookingCollectionFactory $bookingCollectionFactory)
+    { }
 
     public function __invoke(CalculateStatsRequest $request): CalculateStatsResponse
     {
-        // @todo: move to factory
-        $bookingCollection = new BookingCollection([]);
-
-        foreach ($request->data() as $value) {
-            $bookingCollection->add(
-                new Booking(
-                    RequestId::create($value['request_id']),
-                    CheckIn::createFromString($value['check_in']),
-                    Nights::createFromInt($value['nights']),
-                    SellingRate::createFromInt($value['selling_rate']),
-                    Margin::createFromInt($value['margin'])
-                )
-            );
-        }
+        $bookingCollection = $this->bookingCollectionFactory->createFromData($request->data());
 
         $statsResume = $this->statsCalculator->calculate($bookingCollection);
 
