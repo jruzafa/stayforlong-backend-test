@@ -21,6 +21,11 @@ final class Booking
         return (($this->sellingRate->value() * $this->margin->value() / 100));
     }
 
+    public function profitByNight(): float
+    {
+        return (($this->sellingRate->value() * $this->margin->value() / 100) / $this->nights->value());
+    }
+
     // todo: return datetime
     public function checkOut(): int
     {

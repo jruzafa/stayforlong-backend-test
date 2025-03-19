@@ -14,14 +14,14 @@ final readonly class StatsCalculator
 
         /** @var Booking $booking */
         foreach ($bookingRequestCollection as $booking) {
-            $totalProfit += $booking->profit();
+            $totalProfit += $booking->profitByNight();
 
-            if ($min > $booking->profit()) {
-                $min = $booking->profit();
+            if ($booking->profit() < $min) {
+                $min = $booking->profitByNight();
             }
 
-            if ($max < $booking->profit()) {
-                $max = $booking->profit();
+            if ($booking->profit() > $max) {
+                $max = $booking->profitByNight();
             }
         }
 
