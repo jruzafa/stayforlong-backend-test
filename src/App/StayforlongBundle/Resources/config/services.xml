@@ -11,8 +11,16 @@
             <argument type="service" id="stayforlong.booking.domain.stats_calculator"/>
         </service>
 
+        <service id="stayforlong.booking.application.calculate_maximize_booking"
+                 class="Stayforlong\Booking\Application\CalculateMaximizeBooking">
+            <argument type="service" id="stayforlong.booking.domain.booking_collection_factory"/>
+            <argument type="service" id="stayforlong.booking.domain.maximize_calculator" />
+        </service>
+
+
         <!-- DOMAIN SERVICES -->
         <service id="stayforlong.booking.domain.stats_calculator" class="Stayforlong\Booking\Domain\StatsCalculator" />
+        <service id="stayforlong.booking.domain.maximize_calculator" class="Stayforlong\Booking\Domain\MaximizeCalculator" />
 
         <!-- CONTROLLERS -->
         <service id="App\StayforlongBundle\Controller\GetStatsController">
@@ -22,8 +30,18 @@
             <tag name="controller.service_arguments" />
         </service>
 
+        <service id="App\StayforlongBundle\Controller\GetMaximizeController">
+            <argument type="service" id="stayforlong.booking.application.calculate_maximize_booking"/>
+            <argument type="service" id="stayforlong.booking.infrastructure.stats_request_validator" />
+            <argument type="service" id="logger" />
+            <tag name="controller.service_arguments" />
+        </service>
+
         <service id="stayforlong.booking.infrastructure.stats_request_validator"
                  class="Stayforlong\Booking\Infrastructure\StatsRequestValidator">
+        </service>
+
+        <service id="stayforlong.booking.domain.booking_collection_factory" class="Stayforlong\Booking\Domain\BookingCollectionFactory">
         </service>
     </services>
 </container>

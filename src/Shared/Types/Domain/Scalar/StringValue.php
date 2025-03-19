@@ -24,11 +24,6 @@ abstract class StringValue
         return $this->value;
     }
 
-    public function equals(string $value): bool
-    {
-        return $value === $this->value;
-    }
-
     public static function createFromString(string $value)
     {
         return new static($value);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Domain;
 
+use DateInterval;
+
 final class Booking
 {
     public function __construct(
@@ -14,9 +16,38 @@ final class Booking
         private Margin $margin
     ) {}
 
-    public function nonProfit(): float
+    public function profit(): float
     {
-        return (($this->sellingRate->value() * $this->margin->value() / 100) / $this->nights->value());
+        return (($this->sellingRate->value() * $this->margin->value() / 100));
     }
 
+    // todo: return datetime
+    public function checkOut(): int
+    {
+        $checkOut = $this->checkin;
+        $checkOut = $checkOut->add(new DateInterval('P' . $this->nights->value() . 'D'));
+
+        return $checkOut->getTimestamp();
+    }
+
+    // todo: return datetime
+    public function checkIn(): int
+    {
+        return $this->checkin->getTimestamp();
+    }
+
+    public function overlap(Booking $bookingCompare): bool
+    {
+        return $bookingCompare->checkIn() <= $this->checkOut();
+    }
+
+    public function nights(): Nights
+    {
+        return $this->nights;
+    }
+
+    public function id(): RequestId
+    {
+        return $this->id;
+    }
 }

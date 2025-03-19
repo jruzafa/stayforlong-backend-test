@@ -42,4 +42,9 @@ final class RequestId extends StringValue
 
         return $prefix . '_' .  $suffix;
     }
+
+    public function equals(RequestId $requestId): bool
+    {
+        return $this->value() === $requestId->value();
+    }
 }
