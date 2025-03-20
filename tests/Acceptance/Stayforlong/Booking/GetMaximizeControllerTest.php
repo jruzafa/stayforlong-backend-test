@@ -60,6 +60,22 @@ class GetMaximizeControllerTest extends WebTestCase
         );
     }
 
+    public function testGivenEmptyBookingRequestWhenCalculateMaximizeThenBadRequestStatusReturned(): void
+    {
+        $browserClient = static::createClient();
+
+        $browserClient->request(
+            'POST',
+            self::API_ENDPOINT,
+            [],
+            [],
+            [],
+            json_encode([])
+        );
+
+        self::assertResponseStatusCodeSame(400);
+    }
+
     protected function tearDown(): void
     {
         parent::tearDown();
