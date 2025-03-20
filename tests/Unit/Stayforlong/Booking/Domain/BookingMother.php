@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Stayforlong\Booking\Domain;
 
-use Stayforlong\Booking\Domain\Booking;
+use Stayforlong\Booking\Domain\BookingRequest;
 use Stayforlong\Booking\Domain\CheckIn;
 use Stayforlong\Booking\Domain\Margin;
 use Stayforlong\Booking\Domain\Nights;
@@ -19,8 +19,8 @@ final class BookingMother
         ?Nights $nights = null,
         ?SellingRate $sellingRate = null,
         ?Margin $margin = null
-    ): Booking {
-        return new Booking(
+    ): BookingRequest {
+        return new BookingRequest(
             $requestId ?? RequestId::random(),
             $checkIn ?? CheckIn::createFromMutable(
                 new \DateTime()->add(new \DateInterval('P1D'))

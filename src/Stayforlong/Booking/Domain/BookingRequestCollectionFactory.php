@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Domain;
 
-final class BookingCollectionFactory
+final class BookingRequestCollectionFactory
 {
-    public function createFromData(array $bookings): BookingCollection
+    public function createFromData(array $bookings): BookingRequestCollection
     {
-        $collection = new BookingCollection([]);
+        $collection = new BookingRequestCollection([]);
 
         foreach ($bookings as $bookingData) {
             $collection->add(
-                new Booking(
+                new BookingRequest(
                     RequestId::create($bookingData['request_id']),
                     CheckIn::createFromString($bookingData['check_in']),
                     Nights::createFromInt($bookingData['nights']),

@@ -6,21 +6,18 @@ namespace Stayforlong\Booking\Domain;
 
 final class MaximizeCalculator
 {
-    public function calculate(BookingCollection $bookingCollection): MaximizeStats
+    public function calculate(BookingRequestCollection $bookingRequestCollection): MaximizeStatsResume
     {
-        if ($bookingCollection->isEmpty()){
-            return MaximizeStats::empty();
+        if ($bookingRequestCollection->isEmpty()){
+            return MaximizeStatsResume::empty();
         }
 
         $validBookingCombinations = [];
 
-        /** @var Booking $current */
-        $iterator = $bookingCollection->getIterator();
-
-        foreach ($bookingCollection->getIterator() as $current)
+        foreach ($bookingRequestCollection->getIterator() as $current)
         {
-            /** @var Booking $booking */
-            foreach ($bookingCollection->getIterator() as $booking) {
+            /** @var BookingRequest $booking */
+            foreach ($bookingRequestCollection->getIterator() as $booking) {
                 if($booking->id()->equals($current->id())){
                     continue;
                 }
@@ -43,15 +40,15 @@ final class MaximizeCalculator
             if ($bestCombination) {
                 $totalProfitCombination = key($validBookingCombinations);
 
-                $bestCombination = array_map(function (RequestId $id) use ($bookingCollection) {
-                    return $bookingCollection->findById($id);
+                $bestCombination = array_map(function (RequestId $id) use ($bookingRequestCollection) {
+                    return $bookingRequestCollection->findById($id);
                 }, $bestCombination);
 
-                $bookingProfitByNight = array_map(function (Booking $currentBooking) {
+                $bookingProfitByNight = array_map(function (BookingRequest $currentBooking) {
                     return $currentBooking->profitByNight();
                 }, $bestCombination);
 
-                $totalNights = array_reduce($bestCombination, function (int $total, Booking $currentBooking) {
+                $totalNights = array_reduce($bestCombination, function (int $total, BookingRequest $currentBooking) {
                     return $total + $currentBooking->nights()->value();
                 }, 0);
 
@@ -59,8 +56,8 @@ final class MaximizeCalculator
                 $minNight = min($bookingProfitByNight);
                 $avgByNight = round($totalProfitCombination / $totalNights);
 
-                return new MaximizeStats(
-                    requestsIds: array_map(function(Booking $booking) {
+                return new MaximizeStatsResume(
+                    requestsIds: array_map(function(BookingRequest $booking) {
                         return $booking->id()->value();
                     }, $bestCombination),
                     totalProfit: $totalProfitCombination,
@@ -71,6 +68,6 @@ final class MaximizeCalculator
             }
         }
 
-        return MaximizeStats::empty();
+        return MaximizeStatsResume::empty();
     }
 }

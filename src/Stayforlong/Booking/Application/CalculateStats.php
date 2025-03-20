@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Application;
 
-use Stayforlong\Booking\Domain\BookingCollectionFactory;
+use Stayforlong\Booking\Domain\BookingRequestCollectionFactory;
 use Stayforlong\Booking\Domain\StatsCalculator;
 
 final readonly class CalculateStats
 {
     public function __construct(
         private StatsCalculator $statsCalculator,
-        private BookingCollectionFactory $bookingCollectionFactory)
+        private BookingRequestCollectionFactory $bookingRequestCollectionFactory)
     { }
 
     public function __invoke(array $bookingRequests): CalculateStatsResponse
     {
-        $bookingCollection = $this->bookingCollectionFactory->createFromData($bookingRequests);
+        $bookingRequestCollection = $this->bookingRequestCollectionFactory->createFromData($bookingRequests);
 
-        $statsResume = $this->statsCalculator->calculate($bookingCollection);
+        $statsResume = $this->statsCalculator->calculate($bookingRequestCollection);
 
         return new CalculateStatsResponse(
             avgNight: $statsResume->avg(),

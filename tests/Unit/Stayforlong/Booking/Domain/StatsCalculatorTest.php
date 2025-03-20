@@ -4,7 +4,7 @@ namespace App\Tests\Unit\Stayforlong\Booking\Domain;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Stayforlong\Booking\Domain\BookingCollection;
+use Stayforlong\Booking\Domain\BookingRequestCollection;
 use Stayforlong\Booking\Domain\StatsCalculator;
 use Stayforlong\Booking\Domain\StatsResume;
 
@@ -18,7 +18,7 @@ class StatsCalculatorTest extends TestCase
     }
 
     #[DataProvider('dataProviderBookingRequests')]
-    public function testGivenSomeCasesWhenCalculateThenExpectedStatsReturned(BookingCollection $bookingCollection, StatsResume $expectedStatsResume)
+    public function testGivenSomeCasesWhenCalculateThenExpectedStatsReturned(BookingRequestCollection $bookingCollection, StatsResume $expectedStatsResume)
     {
         $statsResumeCalculated = $this->statsCalculator->calculate($bookingCollection);
 

@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\Stayforlong\Booking\Domain;
 
 use PHPUnit\Framework\TestCase;
-use Stayforlong\Booking\Domain\BookingCollection;
+use Stayforlong\Booking\Domain\BookingRequestCollection;
 use Stayforlong\Booking\Domain\MaximizeCalculator;
 
 class MaximizeCalculatorTest extends TestCase
@@ -17,7 +17,7 @@ class MaximizeCalculatorTest extends TestCase
 
     public function testGivenEmptyCollectionWhenCalculateThenEmptyStatsReturned()
     {
-        $collection = new BookingCollection([]);
+        $collection = new BookingRequestCollection([]);
 
         $maximizeStats = $this->maximizeCalculator->calculate($collection);
 

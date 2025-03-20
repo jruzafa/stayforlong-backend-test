@@ -6,7 +6,6 @@ namespace App\StayforlongBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 use Stayforlong\Booking\Application\CalculateStats;
-use Stayforlong\Booking\Application\CalculateStatsRequest;
 use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
 use Stayforlong\Booking\Infrastructure\StatsPresenter;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,13 +39,13 @@ final class GetStatsController
 
             $statsResponse = $this->calculateStatsUseCase->__invoke($collectionBookingRequest);
 
-            $presenter = new StatsPresenter(
+            $statsPresenter = new StatsPresenter(
                 $statsResponse->avgNight(),
                 $statsResponse->minNight(),
                 $statsResponse->maxNight(),
             );
 
-            return new JsonResponse($presenter->toArray());
+            return new JsonResponse($statsPresenter->toArray());
         } catch (\InvalidArgumentException $exception) {
             return new JsonResponse([$exception->getMessage()], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {

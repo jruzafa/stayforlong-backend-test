@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Application;
 
-use Stayforlong\Booking\Domain\BookingCollectionFactory;
+use Stayforlong\Booking\Domain\BookingRequestCollectionFactory;
 use Stayforlong\Booking\Domain\MaximizeCalculator;
 
 final readonly class CalculateMaximizeBooking
 {
     public function __construct(
-        private BookingCollectionFactory $bookingCollectionFactory,
+        private BookingRequestCollectionFactory $bookingCollectionFactory,
         private MaximizeCalculator $calculator
     ) { }
 

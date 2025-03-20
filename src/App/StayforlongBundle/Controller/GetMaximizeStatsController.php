@@ -7,7 +7,7 @@ namespace App\StayforlongBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Stayforlong\Booking\Application\CalculateMaximizeBooking;
 use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
-use Stayforlong\Booking\Infrastructure\MaximizePresenter;
+use Stayforlong\Booking\Infrastructure\MaximizeStatsPresenter;
 use Stayforlong\Booking\Infrastructure\StatsPresenter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +46,7 @@ final class GetMaximizeStatsController
                 $statsResponse->maxNight()
             );
 
-            $maximizePresenter = new MaximizePresenter(
+            $maximizePresenter = new MaximizeStatsPresenter(
                 $statsResponse->requestsIds(),
                 $statsResponse->totalProfit()
             );

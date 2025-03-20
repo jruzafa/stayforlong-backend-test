@@ -23,7 +23,7 @@
         <service id="stayforlong.booking.domain.maximize_calculator" class="Stayforlong\Booking\Domain\MaximizeCalculator" />
 
         <service id="stayforlong.booking.domain.booking_collection_factory"
-                 class="Stayforlong\Booking\Domain\BookingCollectionFactory">
+                 class="Stayforlong\Booking\Domain\BookingRequestCollectionFactory">
         </service>
 
         <!-- CONTROLLERS -->

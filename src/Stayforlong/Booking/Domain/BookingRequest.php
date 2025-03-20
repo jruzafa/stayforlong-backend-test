@@ -5,45 +5,46 @@ declare(strict_types=1);
 namespace Stayforlong\Booking\Domain;
 
 use DateInterval;
+use DateTimeImmutable;
 
-final class Booking
+final class BookingRequest
 {
     public function __construct(
         private RequestId $id,
-        private \DateTimeImmutable $checkin,
+        private DateTimeImmutable $checkin,
         private Nights $nights,
         private SellingRate $sellingRate,
         private Margin $margin
     ) {}
 
+    // todo: create type
     public function profit(): float
     {
         return (($this->sellingRate->value() * $this->margin->value() / 100));
     }
 
+    // todo: create type
     public function profitByNight(): float
     {
         return (($this->sellingRate->value() * $this->margin->value() / 100) / $this->nights->value());
     }
 
-    // todo: return datetime
-    public function checkOut(): int
+    public function checkOut(): DateTimeImmutable
     {
         $checkOut = $this->checkin;
         $checkOut = $checkOut->add(new DateInterval('P' . $this->nights->value() . 'D'));
 
-        return $checkOut->getTimestamp();
+        return $checkOut;
     }
 
-    // todo: return datetime
-    public function checkIn(): int
+    public function checkIn(): DateTimeImmutable
     {
-        return $this->checkin->getTimestamp();
+        return $this->checkin;
     }
 
-    public function overlap(Booking $bookingCompare): bool
+    public function overlap(BookingRequest $bookingCompare): bool
     {
-        return $bookingCompare->checkIn() <= $this->checkOut();
+        return $bookingCompare->checkIn()->getTimestamp() <= $this->checkOut()->getTimestamp();
     }
 
     public function nights(): Nights

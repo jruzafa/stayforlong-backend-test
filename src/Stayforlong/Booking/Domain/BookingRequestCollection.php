@@ -6,9 +6,9 @@ namespace Stayforlong\Booking\Domain;
 
 use Stayforlong\Shared\Types\Domain\Collection;
 
-final class BookingCollection extends Collection
+final class BookingRequestCollection extends Collection
 {
-    public function add(Booking $request): void
+    public function add(BookingRequest $request): void
     {
         $this->items[$request->id()->value()] = $request;
     }
@@ -20,10 +20,10 @@ final class BookingCollection extends Collection
 
     protected function type(): string
     {
-        return Booking::class;
+        return BookingRequest::class;
     }
 
-    public function findById(RequestId $requestId): ?Booking
+    public function findById(RequestId $requestId): ?BookingRequest
     {
         return $this->items[$requestId->value()] ?? null;
     }

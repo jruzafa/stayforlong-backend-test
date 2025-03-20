@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Infrastructure;
 
-final readonly class MaximizePresenter
+final readonly class MaximizeStatsPresenter
 {
     public function __construct(private array $bookingRequestIds, private float $totalProfit) { }
 

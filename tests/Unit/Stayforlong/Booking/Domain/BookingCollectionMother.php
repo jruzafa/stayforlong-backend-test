@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Stayforlong\Booking\Domain;
 
-use Stayforlong\Booking\Domain\BookingCollection;
+use Stayforlong\Booking\Domain\BookingRequestCollection;
 use Stayforlong\Booking\Domain\CheckIn;
 use Stayforlong\Booking\Domain\Margin;
 use Stayforlong\Booking\Domain\Nights;
@@ -13,9 +13,9 @@ use Stayforlong\Booking\Domain\SellingRate;
 
 final class BookingCollectionMother
 {
-    public static function case1(): BookingCollection
+    public static function case1(): BookingRequestCollection
     {
-        $bookingCollection = new BookingCollection([]);
+        $bookingCollection = new BookingRequestCollection([]);
 
         $bookingCollection->add(
             BookingMother::create(
@@ -39,9 +39,9 @@ final class BookingCollectionMother
         return $bookingCollection;
     }
 
-    public static function case2(): BookingCollection
+    public static function case2(): BookingRequestCollection
     {
-        $bookingCollection = new BookingCollection([]);
+        $bookingCollection = new BookingRequestCollection([]);
 
         $bookingCollection->add(
             BookingMother::create(
@@ -74,9 +74,9 @@ final class BookingCollectionMother
         return $bookingCollection;
     }
 
-    public static function case3(): BookingCollection
+    public static function case3(): BookingRequestCollection
     {
-        $bookingCollection = new BookingCollection([]);
+        $bookingCollection = new BookingRequestCollection([]);
 
         $bookingCollection->add(
             BookingMother::create(
@@ -118,9 +118,9 @@ final class BookingCollectionMother
         return $bookingCollection;
     }
 
-    public static function caseOverlapAllBookingRequests(): BookingCollection
+    public static function caseOverlapAllBookingRequests(): BookingRequestCollection
     {
-        $bookingCollection = new BookingCollection([]);
+        $bookingCollection = new BookingRequestCollection([]);
 
         $bookingCollection->add(
             BookingMother::create(
@@ -153,8 +153,8 @@ final class BookingCollectionMother
         return $bookingCollection;
     }
 
-    public static function empty(): BookingCollection
+    public static function empty(): BookingRequestCollection
     {
-        return new BookingCollection([]);
+        return new BookingRequestCollection([]);
     }
 }

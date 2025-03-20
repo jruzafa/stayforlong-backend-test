@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Domain;
 
-final readonly class MaximizeStats
+final readonly class MaximizeStatsResume
 {
     public function __construct(
         private array $requestsIds,
@@ -14,7 +14,7 @@ final readonly class MaximizeStats
         private float $maxNight
     ) { }
 
-    public static function empty(): MaximizeStats
+    public static function empty(): MaximizeStatsResume
     {
         return new self(
             [],
