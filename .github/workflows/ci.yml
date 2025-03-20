@@ -10,6 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create env file
+        run: |
+          cp .env.APP_ENV .env
+
       - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
