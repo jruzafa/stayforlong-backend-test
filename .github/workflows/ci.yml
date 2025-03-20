@@ -23,5 +23,8 @@ jobs:
           composer-options: "--no-progress --optimize-autoloader --no-scripts"
           custom-cache-key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
-      - name: Run unit test
+      - name: Run Unit test
         run: vendor/bin/phpunit --testsuite Unit
+
+      - name: Run Acceptance test
+        run: vendor/bin/phpunit --testsuite Acceptance
