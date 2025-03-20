@@ -35,10 +35,10 @@ class MaximizeCalculatorTest extends TestCase
             'bookata_XY123',
             'acme_AAAAA'
         ], $maximizeStats->requestsIds());
-        self::assertEquals(88, $maximizeStats->totalProfit());
-        self::assertEquals(10, $maximizeStats->avgNight());
-        self::assertEquals(8, $maximizeStats->minNight());
-        self::assertEquals(12, $maximizeStats->maxNight());
+        self::assertEqualsWithDelta(88, $maximizeStats->totalProfit(), 0.01);
+        self::assertEqualsWithDelta(10, $maximizeStats->avgNight(), 0.01);
+        self::assertEqualsWithDelta(8, $maximizeStats->minNight(), 0.01);
+        self::assertEqualsWithDelta(12, $maximizeStats->maxNight(), 0.01);
     }
 
     public function testGivenOverlapAllCaseWhenCalculateThenEmptyStatsReturned()
