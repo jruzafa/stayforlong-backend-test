@@ -40,9 +40,25 @@ class GetStatsControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
         self::assertJsonStringEqualsJsonFile(
-            __DIR__ . '/expected_response.json',
+            __DIR__ . '/stats_expected_response.json',
             $browserClient->getResponse()->getContent()
         );
+    }
+
+    public function testGivenEmptyBookingRequestWhenCalculateStatsThenBadRequestStatusReturned(): void
+    {
+        $browserClient = static::createClient();
+
+        $browserClient->request(
+            'POST',
+            self::API_ENDPOINT,
+            [],
+            [],
+            [],
+            json_encode([])
+        );
+
+        self::assertResponseStatusCodeSame(400);
     }
 
     protected function tearDown(): void

@@ -16,11 +16,11 @@ final readonly class StatsCalculator
         foreach ($bookingRequestCollection as $booking) {
             $totalProfit += $booking->profitByNight();
 
-            if ($booking->profit() < $min) {
+            if ($booking->profitByNight() < $min) {
                 $min = $booking->profitByNight();
             }
 
-            if ($booking->profit() > $max) {
+            if ($booking->profitByNight() > $max) {
                 $max = $booking->profitByNight();
             }
         }

@@ -29,7 +29,7 @@ class StatsCalculatorTest extends TestCase
         $this->assertEquals(0, $statsResume->max());
     }
 
-    #[DataProvider('dataProviderBookingRequest')]
+    #[DataProvider('dataProviderBookingRequests')]
     public function testGivenSomeCasesWhenCalculateThenExpectedStatsReturned(BookingCollection $bookingCollection, StatsResume $expectedStatsResume)
     {
         $statsResumeCalculated = $this->statsCalculator->calculate($bookingCollection);
@@ -39,7 +39,7 @@ class StatsCalculatorTest extends TestCase
         self::assertEqualsWithDelta($expectedStatsResume->max(), $statsResumeCalculated->max(), 0.01);
     }
 
-    public static function dataProviderBookingRequest(): array
+    public static function dataProviderBookingRequests(): array
     {
         return [
             'case 1' => [BookingCollectionMother::case1(), StatsResumeMother::case1()],
