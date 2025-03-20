@@ -31,10 +31,6 @@ final readonly class StatsCalculator
 
         $avg = $totalProfit / $bookingRequestCollection->count();
 
-        return new StatsResume(
-            avg: $avg,
-            min: $min,
-            max: $max
-        );
+        return new StatsResume($avg, $min, $max);
     }
 }

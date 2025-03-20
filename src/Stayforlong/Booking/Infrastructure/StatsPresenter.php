@@ -8,7 +8,7 @@ final readonly class StatsPresenter
 {
     public function __construct(private float $avgNight, private float $minNight, private float $maxNight) { }
 
-    public function toArray():array
+    public function toArray(): array
     {
         return [
             'avg_night' => $this->avgNight,

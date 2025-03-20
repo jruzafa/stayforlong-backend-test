@@ -21,9 +21,9 @@ final readonly class CalculateStats
         $statsResume = $this->statsCalculator->calculate($bookingRequestCollection);
 
         return new CalculateStatsResponse(
-            avgNight: $statsResume->avg(),
-            minNight: $statsResume->min(),
-            maxNight: $statsResume->max()
+            $statsResume->avg(),
+            $statsResume->min(),
+            $statsResume->max()
         );
     }
 }

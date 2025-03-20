@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Domain;
 
-final class StatsResume
+final readonly class StatsResume
 {
     public function __construct(private float $avg, private float $min, private float $max) { }
 

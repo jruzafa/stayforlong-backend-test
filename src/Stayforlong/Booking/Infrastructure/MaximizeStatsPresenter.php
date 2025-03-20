@@ -8,7 +8,7 @@ final readonly class MaximizeStatsPresenter
 {
     public function __construct(private array $bookingRequestIds, private float $totalProfit) { }
 
-    public function toArray():array
+    public function toArray(): array
     {
         return [
             'request_ids' => $this->bookingRequestIds,

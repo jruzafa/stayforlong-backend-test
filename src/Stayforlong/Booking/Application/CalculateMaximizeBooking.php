@@ -21,11 +21,11 @@ final readonly class CalculateMaximizeBooking
         $stats = $this->calculator->calculate($bookingCollection);
 
         return new CalculateMaximizeBookingResponse(
-            requestsIds: $stats->requestsIds(),
-            totalProfit: $stats->totalProfit(),
-            avgNight: $stats->avgNight(),
-            minNight: $stats->minNight(),
-            maxNight: $stats->maxNight()
+            $stats->requestsIds(),
+            $stats->totalProfit(),
+            $stats->avgNight(),
+            $stats->minNight(),
+            $stats->maxNight()
         );
     }
 }
