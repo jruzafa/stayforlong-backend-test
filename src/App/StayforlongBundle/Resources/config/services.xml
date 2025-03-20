@@ -18,31 +18,32 @@
             <argument type="service" id="stayforlong.booking.domain.maximize_calculator" />
         </service>
 
-
         <!-- DOMAIN SERVICES -->
         <service id="stayforlong.booking.domain.stats_calculator" class="Stayforlong\Booking\Domain\StatsCalculator" />
         <service id="stayforlong.booking.domain.maximize_calculator" class="Stayforlong\Booking\Domain\MaximizeCalculator" />
 
+        <service id="stayforlong.booking.domain.booking_collection_factory"
+                 class="Stayforlong\Booking\Domain\BookingCollectionFactory">
+        </service>
+
         <!-- CONTROLLERS -->
         <service id="App\StayforlongBundle\Controller\GetStatsController">
             <argument type="service" id="stayforlong.booking.application.calculate_stats"/>
-            <argument type="service" id="stayforlong.booking.infrastructure.stats_request_validator" />
+            <argument type="service" id="stayforlong.booking.infrastructure.booking_request_validator" />
             <argument type="service" id="logger" />
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="App\StayforlongBundle\Controller\GetMaximizeController">
+        <service id="App\StayforlongBundle\Controller\GetMaximizeStatsController">
             <argument type="service" id="stayforlong.booking.application.calculate_maximize_booking"/>
-            <argument type="service" id="stayforlong.booking.infrastructure.stats_request_validator" />
+            <argument type="service" id="stayforlong.booking.infrastructure.booking_request_validator" />
             <argument type="service" id="logger" />
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="stayforlong.booking.infrastructure.stats_request_validator"
-                 class="Stayforlong\Booking\Infrastructure\StatsRequestValidator">
-        </service>
-
-        <service id="stayforlong.booking.domain.booking_collection_factory" class="Stayforlong\Booking\Domain\BookingCollectionFactory">
+        <!-- INFRASTRUCTURE SERVICES -->
+        <service id="stayforlong.booking.infrastructure.booking_request_validator"
+                 class="Stayforlong\Booking\Infrastructure\BookingRequestValidator">
         </service>
     </services>
 </container>

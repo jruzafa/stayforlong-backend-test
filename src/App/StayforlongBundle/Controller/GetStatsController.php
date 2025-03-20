@@ -7,20 +7,20 @@ namespace App\StayforlongBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Stayforlong\Booking\Application\CalculateStats;
 use Stayforlong\Booking\Application\CalculateStatsRequest;
-use Stayforlong\Booking\Infrastructure\StatsRequestValidator;
+use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 final class GetStatsController
 {
-    private StatsRequestValidator $statsRequestValidator;
+    private BookingRequestValidator $statsRequestValidator;
     private CalculateStats $calculateStatsUseCase;
     private LoggerInterface $logger;
 
     public function __construct(
         CalculateStats $calculateStatsUseCase,
-        StatsRequestValidator $statsRequestValidator,
+        BookingRequestValidator $statsRequestValidator,
         LoggerInterface $logger,
     )
     {
