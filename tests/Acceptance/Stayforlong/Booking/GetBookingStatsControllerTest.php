@@ -4,7 +4,7 @@ namespace App\Tests\Acceptance\Stayforlong\Booking;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class GetStatsControllerTest extends WebTestCase
+class GetBookingStatsControllerTest extends WebTestCase
 {
     private const string API_ENDPOINT = '/api/v1/booking/stats';
 

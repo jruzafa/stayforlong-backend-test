@@ -4,7 +4,7 @@ namespace App\Tests\Acceptance\Stayforlong\Booking;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class GetMaximizeControllerTest extends WebTestCase
+class GetMaximizeBookingControllerTest extends WebTestCase
 {
     private const string API_ENDPOINT = '/api/v1/booking/maximize';
 
