@@ -14,10 +14,18 @@ final readonly class CalculateMaximizeBooking
         private MaximizeCalculator $calculator
     ) { }
 
-    public function __invoke(CalculateMaximizeBookingRequest $request): array
+    public function __invoke(array $bookingRequests): CalculateMaximizeBookingResponse
     {
-        $bookingCollection = $this->bookingCollectionFactory->createFromData($request->data());
+        $bookingCollection = $this->bookingCollectionFactory->createFromData($bookingRequests);
 
-        return $this->calculator->calculate($bookingCollection);
+        $stats = $this->calculator->calculate($bookingCollection);
+
+        return new CalculateMaximizeBookingResponse(
+            requestsIds: $stats->requestsIds(),
+            totalProfit: $stats->totalProfit(),
+            avgNight: $stats->avgNight(),
+            minNight: $stats->minNight(),
+            maxNight: $stats->maxNight()
+        );
     }
 }

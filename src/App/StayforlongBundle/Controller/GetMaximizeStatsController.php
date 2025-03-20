@@ -6,8 +6,9 @@ namespace App\StayforlongBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 use Stayforlong\Booking\Application\CalculateMaximizeBooking;
-use Stayforlong\Booking\Application\CalculateMaximizeBookingRequest;
 use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
+use Stayforlong\Booking\Infrastructure\MaximizePresenter;
+use Stayforlong\Booking\Infrastructure\StatsPresenter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,12 +38,20 @@ final class GetMaximizeStatsController
 
             $this->statsRequestValidator->validate($collectionBookingRequest);
 
-            $statsResponse = $this->maximizeCalculatorUseCase->__invoke(
-                new CalculateMaximizeBookingRequest($collectionBookingRequest),
+            $statsResponse = $this->maximizeCalculatorUseCase->__invoke($collectionBookingRequest);
+
+            $presenter = new StatsPresenter(
+                $statsResponse->avgNight(),
+                $statsResponse->minNight(),
+                $statsResponse->maxNight()
             );
 
-            // todo: move to presenter?
-            return new JsonResponse($statsResponse);
+            $maximizePresenter = new MaximizePresenter(
+                $statsResponse->requestsIds(),
+                $statsResponse->totalProfit()
+            );
+
+            return new JsonResponse( $presenter->toArray() + $maximizePresenter->toArray());
         } catch (\InvalidArgumentException $exception) {
             return new JsonResponse([$exception->getMessage()], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {

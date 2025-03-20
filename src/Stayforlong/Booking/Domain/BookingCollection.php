@@ -13,6 +13,11 @@ final class BookingCollection extends Collection
         $this->items[$request->id()->value()] = $request;
     }
 
+    public function isEmpty(): bool
+    {
+        return $this->count() === 0;
+    }
+
     protected function type(): string
     {
         return Booking::class;

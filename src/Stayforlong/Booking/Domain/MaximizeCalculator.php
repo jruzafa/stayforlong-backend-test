@@ -6,11 +6,17 @@ namespace Stayforlong\Booking\Domain;
 
 final class MaximizeCalculator
 {
-    public function calculate(BookingCollection $bookingCollection): array
+    public function calculate(BookingCollection $bookingCollection): MaximizeStats
     {
+        if ($bookingCollection->isEmpty()){
+            return MaximizeStats::empty();
+        }
+
         $validBookingCombinations = [];
 
         /** @var Booking $current */
+        $iterator = $bookingCollection->getIterator();
+
         foreach ($bookingCollection->getIterator() as $current)
         {
             /** @var Booking $booking */
@@ -45,33 +51,26 @@ final class MaximizeCalculator
                     return $currentBooking->profitByNight();
                 }, $bestCombination);
 
-                $totalNights = array_reduce($bestCombination, function (int $carry, Booking $currentBooking) {
-                    return $carry + $currentBooking->nights()->value();
+                $totalNights = array_reduce($bestCombination, function (int $total, Booking $currentBooking) {
+                    return $total + $currentBooking->nights()->value();
                 }, 0);
 
                 $maxNight = max($bookingProfitByNight);
                 $minNight = min($bookingProfitByNight);
                 $avgByNight = round($totalProfitCombination / $totalNights);
 
-                return [
-                    'request_ids' => array_map(function(Booking $reserva) {
-                        return $reserva->id()->value();
+                return new MaximizeStats(
+                    requestsIds: array_map(function(Booking $booking) {
+                        return $booking->id()->value();
                     }, $bestCombination),
-                    'total_profit' => $totalProfitCombination,
-                    'avg_night' => $avgByNight,
-                    'min_night' => $minNight,
-                    'max_night' => $maxNight
-                ];
+                    totalProfit: $totalProfitCombination,
+                    avgNight: $avgByNight,
+                    minNight: $minNight,
+                    maxNight: $maxNight
+                );
             }
         }
 
-        // todo: call to factory method
-        return [
-            'request_ids' => [],
-            'total_profit' => 0,
-            'avg_night' => 0,
-            'min_night' => 0,
-            'max_night' => 0
-        ];
+        return MaximizeStats::empty();
     }
 }
