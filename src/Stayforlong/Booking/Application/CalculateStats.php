@@ -14,9 +14,9 @@ final readonly class CalculateStats
         private BookingCollectionFactory $bookingCollectionFactory)
     { }
 
-    public function __invoke(CalculateStatsRequest $request): CalculateStatsResponse
+    public function __invoke(array $bookingRequests): CalculateStatsResponse
     {
-        $bookingCollection = $this->bookingCollectionFactory->createFromData($request->data());
+        $bookingCollection = $this->bookingCollectionFactory->createFromData($bookingRequests);
 
         $statsResume = $this->statsCalculator->calculate($bookingCollection);
 

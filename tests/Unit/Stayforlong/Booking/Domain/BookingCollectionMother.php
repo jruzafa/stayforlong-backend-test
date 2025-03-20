@@ -69,4 +69,9 @@ final class BookingCollectionMother
 
         return $bookingCollection;
     }
+
+    public static function empty(): BookingCollection
+    {
+        return new BookingCollection([]);
+    }
 }

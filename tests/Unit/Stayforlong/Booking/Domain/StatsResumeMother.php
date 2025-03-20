@@ -25,4 +25,13 @@ final class StatsResumeMother
             max: 12.1
         );
     }
+
+    public static function empty(): StatsResume
+    {
+        return new StatsResume(
+            avg: 0,
+            min: 0,
+            max: 0
+        );
+    }
 }

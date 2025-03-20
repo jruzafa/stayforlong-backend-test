@@ -17,18 +17,6 @@ class StatsCalculatorTest extends TestCase
         $this->statsCalculator = new StatsCalculator();
     }
 
-    public function testGivenEmptyCollectionWhenCalculateThenZeroReturned()
-    {
-        $statsCalculator = new StatsCalculator();
-        $collection = new BookingCollection([]);
-
-        $statsResume = $statsCalculator->calculate($collection);
-
-        $this->assertEquals(0, $statsResume->avg());
-        $this->assertEquals(0, $statsResume->min());
-        $this->assertEquals(0, $statsResume->max());
-    }
-
     #[DataProvider('dataProviderBookingRequests')]
     public function testGivenSomeCasesWhenCalculateThenExpectedStatsReturned(BookingCollection $bookingCollection, StatsResume $expectedStatsResume)
     {
@@ -43,7 +31,8 @@ class StatsCalculatorTest extends TestCase
     {
         return [
             'case 1' => [BookingCollectionMother::case1(), StatsResumeMother::case1()],
-            'case 2' => [BookingCollectionMother::case2(), StatsResumeMother::case2()]
+            'case 2' => [BookingCollectionMother::case2(), StatsResumeMother::case2()],
+            'empty' => [BookingCollectionMother::empty(), StatsResumeMother::empty()]
         ];
     }
 }
