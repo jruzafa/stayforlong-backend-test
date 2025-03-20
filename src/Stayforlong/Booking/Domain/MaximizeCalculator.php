@@ -12,7 +12,7 @@ final class MaximizeCalculator
             return MaximizeStatsResume::empty();
         }
 
-        $validBookingCombinations = [];
+        $validBookingRequestCombinations = [];
 
         foreach ($bookingRequestCollection->getIterator() as $current)
         {
@@ -28,17 +28,17 @@ final class MaximizeCalculator
 
                 $totalProfit = $current->profit() + $booking->profit();
 
-                $validBookingCombinations[$totalProfit] = [$current->id(), $booking->id()];
+                $validBookingRequestCombinations[$totalProfit] = [$current->id(), $booking->id()];
             }
         }
 
-        krsort($validBookingCombinations);
+        krsort($validBookingRequestCombinations);
 
-        if (count($validBookingCombinations) > 0) {
-            $bestCombination = reset($validBookingCombinations);
+        if (count($validBookingRequestCombinations) > 0) {
+            $bestCombination = reset($validBookingRequestCombinations);
 
             if ($bestCombination) {
-                $totalProfitCombination = key($validBookingCombinations);
+                $totalProfitCombination = key($validBookingRequestCombinations);
 
                 $bestCombination = array_map(function (RequestId $id) use ($bookingRequestCollection) {
                     return $bookingRequestCollection->findById($id);

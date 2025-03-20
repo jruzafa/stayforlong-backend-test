@@ -17,16 +17,14 @@ final class BookingRequest
         private Margin $margin
     ) {}
 
-    // todo: create type
     public function profit(): float
     {
         return (($this->sellingRate->value() * $this->margin->value() / 100));
     }
 
-    // todo: create type
     public function profitByNight(): float
     {
-        return (($this->sellingRate->value() * $this->margin->value() / 100) / $this->nights->value());
+        return ($this->profit() / $this->nights->value());
     }
 
     public function checkOut(): DateTimeImmutable
