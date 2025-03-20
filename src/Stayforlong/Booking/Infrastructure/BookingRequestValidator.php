@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Infrastructure;
 
-final class StatsRequestValidator
+final class BookingRequestValidator
 {
     private const array REQUIRED_FIELDS = [
         'request_id',

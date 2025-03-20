@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Stayforlong\Shared\Orm\Domain;
+namespace Stayforlong\Shared\Types\Domain;
 
 use ArrayIterator;
 use Countable;

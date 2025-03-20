@@ -18,8 +18,6 @@ final readonly class CalculateMaximizeBooking
     {
         $bookingCollection = $this->bookingCollectionFactory->createFromData($request->data());
 
-        $statsResume = $this->calculator->calculate($bookingCollection);
-
-        return $statsResume;
+        return $this->calculator->calculate($bookingCollection);
     }
 }

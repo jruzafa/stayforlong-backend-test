@@ -7,20 +7,20 @@ namespace App\StayforlongBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Stayforlong\Booking\Application\CalculateMaximizeBooking;
 use Stayforlong\Booking\Application\CalculateMaximizeBookingRequest;
-use Stayforlong\Booking\Infrastructure\StatsRequestValidator;
+use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class GetMaximizeController
+final class GetMaximizeStatsController
 {
-    private StatsRequestValidator $statsRequestValidator;
+    private BookingRequestValidator $statsRequestValidator;
     private CalculateMaximizeBooking $maximizeCalculatorUseCase;
     private LoggerInterface $logger;
 
     public function __construct(
         CalculateMaximizeBooking $maximizeCalculator,
-        StatsRequestValidator $statsRequestValidator,
+        BookingRequestValidator $statsRequestValidator,
         LoggerInterface $logger,
     )
     {
@@ -33,8 +33,6 @@ final class GetMaximizeController
     {
         try {
             $collectionBookingRequest = $request->getContent();
-
-            // todo: validate json decode errors
             $collectionBookingRequest = json_decode($collectionBookingRequest, true);
 
             $this->statsRequestValidator->validate($collectionBookingRequest);

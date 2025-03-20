@@ -24,12 +24,12 @@ abstract class StringValue
         return $this->value;
     }
 
-    public static function createFromString(string $value)
+    public static function createFromString(string $value): static
     {
         return new static($value);
     }
 
-    public static function create(string $value)
+    public static function create(string $value): static
     {
         return new static($value);
     }

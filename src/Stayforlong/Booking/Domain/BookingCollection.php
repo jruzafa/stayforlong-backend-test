@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stayforlong\Booking\Domain;
 
-use Stayforlong\Shared\Orm\Domain\Collection;
+use Stayforlong\Shared\Types\Domain\Collection;
 
 final class BookingCollection extends Collection
 {

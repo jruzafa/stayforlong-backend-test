@@ -42,7 +42,7 @@ final class MaximizeCalculator
                 }, $bestCombination);
 
                 $bookingProfitByNight = array_map(function (Booking $currentBooking) {
-                    return $currentBooking->profit() / $currentBooking->nights()->value();
+                    return $currentBooking->profitByNight();
                 }, $bestCombination);
 
                 $totalNights = array_reduce($bestCombination, function (int $carry, Booking $currentBooking) {

@@ -7,8 +7,6 @@
     <route id="booking_stats" path="/stats" methods="POST"
            controller="App\StayforlongBundle\Controller\GetStatsController"  />
 
-
-    <route id="booking_maximize" path="/maximize" methods="POST"
-           controller="App\StayforlongBundle\Controller\GetMaximizeController"  />
-
+    <route id="booking_maximize_stats" path="/maximize" methods="POST"
+           controller="App\StayforlongBundle\Controller\GetMaximizeStatsController"  />
 </routes>

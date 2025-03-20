@@ -16,9 +16,6 @@ class NaturalInteger extends IntegerValue
         return new static(static::randomValue());
     }
 
-    /**
-     * @param int $value
-     */
     protected function guard(int $value): void
     {
         Assert::greaterThan($value, 0);
