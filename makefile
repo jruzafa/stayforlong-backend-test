@@ -40,7 +40,7 @@ up: ## Docker up and detach services
 	$(DOCKER_COMPOSE) up --detach
 
 .PHONY: debug
-debug: ## Docker up and detach services
+debug: ## Docker up with xdebug enable
 	export XDEBUG_MODE=debug,coverage;
 	$(DOCKER_COMPOSE) up --detach
 
@@ -60,6 +60,6 @@ restart: ## Docker restart container. E.g. reset all: "make restart", reset one:
 install: ## Install dependencies
 	$(DOCKER_COMPOSE_RUN) composer install
 
-.PHONY: unit
-unit: ## Execute unit test
-	$(DOCKER_COMPOSE_RUN) php bin/phpunit --testsuite Unit
+.PHONY: test
+test: ## Execute unit test
+	$(DOCKER_COMPOSE_RUN) php bin/phpunit
