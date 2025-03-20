@@ -16,14 +16,15 @@ jobs:
           path: /tmp/composer-cache
           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
-      - name: Install dependencies
-        uses: php-actions/composer@v6
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          dev: yes
-          args: --no-scripts
-          php_version: "8.4.5"
+          php-version: '8.4.5'
 
-      - run: echo "Composer dependencies have been installed"
+      - name: Install dependencies
+        uses: "ramsey/composer-install@v3"
+        with:
+          composer-options: "--no-progress --optimize-autoloader --no-scripts"
 
       - name: Run unit test
         run: vendor/bin/phpunit --testsuite Unit
