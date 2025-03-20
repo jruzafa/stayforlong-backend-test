@@ -5,26 +5,27 @@ declare(strict_types=1);
 namespace App\StayforlongBundle\Controller;
 
 use Psr\Log\LoggerInterface;
-use Stayforlong\Booking\Application\CalculateStats;
+use Stayforlong\Booking\Application\CalculateMaximizeBooking;
 use Stayforlong\Booking\Infrastructure\BookingRequestValidator;
+use Stayforlong\Booking\Infrastructure\MaximizeStatsPresenter;
 use Stayforlong\Booking\Infrastructure\StatsPresenter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class GetStatsController
+final class GetMaximizeBookingController
 {
     private BookingRequestValidator $statsRequestValidator;
-    private CalculateStats $calculateStatsUseCase;
+    private CalculateMaximizeBooking $maximizeCalculatorUseCase;
     private LoggerInterface $logger;
 
     public function __construct(
-        CalculateStats $calculateStatsUseCase,
+        CalculateMaximizeBooking $maximizeCalculator,
         BookingRequestValidator $statsRequestValidator,
         LoggerInterface $logger,
     )
     {
-        $this->calculateStatsUseCase = $calculateStatsUseCase;
+        $this->maximizeCalculatorUseCase = $maximizeCalculator;
         $this->statsRequestValidator = $statsRequestValidator;
         $this->logger = $logger;
     }
@@ -32,20 +33,25 @@ final class GetStatsController
     public function __invoke(Request $request): Response
     {
         try {
-            $collectionBookingRequest = $request->getContent();
-            $collectionBookingRequest = json_decode($collectionBookingRequest, true, JSON_THROW_ON_ERROR);
+            $bookingRequests = $request->getContent();
+            $bookingRequests = json_decode($bookingRequests, true);
 
-            $this->statsRequestValidator->validate($collectionBookingRequest);
+            $this->statsRequestValidator->validate($bookingRequests);
 
-            $statsResponse = $this->calculateStatsUseCase->__invoke($collectionBookingRequest);
+            $statsResponse = $this->maximizeCalculatorUseCase->__invoke($bookingRequests);
 
-            $statsPresenter = new StatsPresenter(
+            $presenter = new StatsPresenter(
                 $statsResponse->avgNight(),
                 $statsResponse->minNight(),
-                $statsResponse->maxNight(),
+                $statsResponse->maxNight()
             );
 
-            return new JsonResponse($statsPresenter->toArray());
+            $maximizePresenter = new MaximizeStatsPresenter(
+                $statsResponse->requestsIds(),
+                $statsResponse->totalProfit()
+            );
+
+            return new JsonResponse( $presenter->toArray() + $maximizePresenter->toArray());
         } catch (\InvalidArgumentException $exception) {
             return new JsonResponse([$exception->getMessage()], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {

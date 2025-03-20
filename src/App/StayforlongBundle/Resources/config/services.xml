@@ -27,14 +27,14 @@
         </service>
 
         <!-- CONTROLLERS -->
-        <service id="App\StayforlongBundle\Controller\GetStatsController">
+        <service id="App\StayforlongBundle\Controller\GetBookingStatsController">
             <argument type="service" id="stayforlong.booking.application.calculate_stats"/>
             <argument type="service" id="stayforlong.booking.infrastructure.booking_request_validator" />
             <argument type="service" id="logger" />
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="App\StayforlongBundle\Controller\GetMaximizeStatsController">
+        <service id="App\StayforlongBundle\Controller\GetMaximizeBookingController">
             <argument type="service" id="stayforlong.booking.application.calculate_maximize_booking"/>
             <argument type="service" id="stayforlong.booking.infrastructure.booking_request_validator" />
             <argument type="service" id="logger" />

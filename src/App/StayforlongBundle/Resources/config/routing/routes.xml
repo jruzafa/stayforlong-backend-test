@@ -5,8 +5,8 @@
         https://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="booking_stats" path="/stats" methods="POST"
-           controller="App\StayforlongBundle\Controller\GetStatsController"  />
+           controller="App\StayforlongBundle\Controller\GetBookingStatsController"  />
 
     <route id="booking_maximize_stats" path="/maximize" methods="POST"
-           controller="App\StayforlongBundle\Controller\GetMaximizeStatsController"  />
+           controller="App\StayforlongBundle\Controller\GetMaximizeBookingController"  />
 </routes>
