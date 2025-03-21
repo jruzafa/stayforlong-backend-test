@@ -118,6 +118,50 @@ final class BookingCollectionMother
         return $bookingCollection;
     }
 
+    public static function case4(): BookingRequestCollection
+    {
+        $bookingCollection = new BookingRequestCollection([]);
+
+        $bookingCollection->add(
+            BookingMother::create(
+                RequestId::create('acme_AAAAA'),
+                CheckIn::createFromString('2026-01-10'),
+                Nights::createFromInt(4),
+                SellingRate::createFromInt(160),
+                Margin::createFromInt(30)
+            )
+        );
+        $bookingCollection->add(
+            BookingMother::create(
+                RequestId::create('bookata_XY123'),
+                CheckIn::createFromString('2026-01-01'),
+                Nights::createFromInt(5),
+                SellingRate::createFromInt(200),
+                Margin::createFromInt(20)
+            )
+        );
+        $bookingCollection->add(
+            BookingMother::create(
+                RequestId::create('kayete_PP234'),
+                CheckIn::createFromString('2026-01-20'),
+                Nights::createFromInt(4),
+                SellingRate::createFromInt(156),
+                Margin::createFromInt(10)
+            )
+        );
+        $bookingCollection->add(
+            BookingMother::create(
+                RequestId::create('atropote_AA930'),
+                CheckIn::createFromString('2026-02-04'),
+                Nights::createFromInt(4),
+                SellingRate::createFromInt(150),
+                Margin::createFromInt(6)
+            )
+        );
+
+        return $bookingCollection;
+    }
+
     public static function caseOverlapAllBookingRequests(): BookingRequestCollection
     {
         $bookingCollection = new BookingRequestCollection([]);

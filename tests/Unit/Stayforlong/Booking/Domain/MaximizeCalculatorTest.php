@@ -41,6 +41,20 @@ class MaximizeCalculatorTest extends TestCase
         self::assertEqualsWithDelta(12, $maximizeStats->maxNight(), 0.01);
     }
 
+    public function testGivenValidCaseWithMoreThanOneCombinationWhenCalculateThenExpectedMaximizeStatsReturned()
+    {
+        $maximizeStats = $this->maximizeCalculator->calculate(BookingCollectionMother::case4());
+
+        self::assertEquals([
+            'bookata_XY123',
+            'acme_AAAAA'
+        ], $maximizeStats->requestsIds());
+        self::assertEqualsWithDelta(88, $maximizeStats->totalProfit(), 0.01);
+        self::assertEqualsWithDelta(10, $maximizeStats->avgNight(), 0.01);
+        self::assertEqualsWithDelta(8, $maximizeStats->minNight(), 0.01);
+        self::assertEqualsWithDelta(12, $maximizeStats->maxNight(), 0.01);
+    }
+
     public function testGivenOverlapAllCaseWhenCalculateThenEmptyStatsReturned()
     {
         $maximizeStats = $this->maximizeCalculator->calculate(BookingCollectionMother::caseOverlapAllBookingRequests());
