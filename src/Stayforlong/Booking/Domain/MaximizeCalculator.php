@@ -14,6 +14,7 @@ final class MaximizeCalculator
 
         $validBookingRequestCombinations = [];
 
+        /** @var BookingRequest $current */
         foreach ($bookingRequestCollection->getIterator() as $current)
         {
             /** @var BookingRequest $booking */

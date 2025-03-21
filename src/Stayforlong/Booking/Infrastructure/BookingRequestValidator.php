@@ -27,7 +27,5 @@ final class BookingRequestValidator
                 }
             }
         }
-
-        // todo: validate types?
     }
 }
