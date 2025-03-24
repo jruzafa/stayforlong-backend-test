@@ -3,7 +3,7 @@
 ### Installation
 Add entry in /etc/hosts
 ```bash
-127.0.0.1 stayforlong.test
+127.0.0.1 sfl.test
 ```
 Build images
 ```bash
@@ -30,5 +30,5 @@ make debug
 ```
 
 ## API Urls
-- http://stayforlong.test:8080/api/v1/booking/maximize
-- http://stayforlong.test:8080/api/v1/booking/stats
+- http://sfl.test:8080/api/v1/booking/maximize
+- http://sfl.test:8080/api/v1/booking/stats
