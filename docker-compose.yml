@@ -1,7 +1,7 @@
 
 services:
   php:
-    container_name: stayforlong-php-fpm
+    container_name: sfl-php-fpm
     build:
       context: .
       dockerfile: .docker/php-fpm/Dockerfile
@@ -15,11 +15,11 @@ services:
     volumes:
       - ${APP_CODE_PATH}:${APP_WEB_ROOT}
     environment:
-      - PHP_IDE_CONFIG=serverName=stayforlong.test
+      - PHP_IDE_CONFIG=serverName=sfl.test
       - PHP_XDEBUG_MODE=${XDEBUG_MODE:-off}
       - PHP_XDEBUG_REMOTE_HOST=host.docker.internal
   nginx:
-    container_name: stayforlong-nginx
+    container_name: sfl-nginx
     build:
       context: .
       dockerfile: .docker/nginx/Dockerfile

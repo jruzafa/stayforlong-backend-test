@@ -44,6 +44,11 @@ debug: ## Docker up with xdebug enable
 	export XDEBUG_MODE=debug,coverage;
 	$(DOCKER_COMPOSE) up --detach
 
+.PHONY: profiling
+profiling: ## Docker up with xdebug profiling enable
+	export XDEBUG_MODE=profile,coverage;
+	$(DOCKER_COMPOSE) up --detach
+
 .PHONY: down
 down: ## Docker down
 	$(DOCKER_COMPOSE) down
