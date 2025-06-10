@@ -6,7 +6,4 @@ namespace Stayforlong\Booking\Domain;
 
 use Stayforlong\Shared\Types\Domain\Scalar\NaturalInteger;
 
-final class Nights extends NaturalInteger
-{
-
-}
+final class Nights extends NaturalInteger {}

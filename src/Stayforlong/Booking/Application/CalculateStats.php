@@ -9,21 +9,17 @@ use Stayforlong\Booking\Domain\StatsCalculator;
 
 final readonly class CalculateStats
 {
-    public function __construct(
-        private StatsCalculator $statsCalculator,
-        private BookingRequestCollectionFactory $bookingRequestCollectionFactory)
-    { }
+	public function __construct(
+		private StatsCalculator $statsCalculator,
+		private BookingRequestCollectionFactory $bookingRequestCollectionFactory
+	) {}
 
-    public function __invoke(array $bookingRequests): CalculateStatsResponse
-    {
-        $bookingRequestCollection = $this->bookingRequestCollectionFactory->createFromData($bookingRequests);
+	public function __invoke(array $bookingRequests): CalculateStatsResponse
+	{
+		$bookingRequestCollection = $this->bookingRequestCollectionFactory->createFromData($bookingRequests);
 
-        $statsResume = $this->statsCalculator->calculate($bookingRequestCollection);
+		$statsResume = $this->statsCalculator->calculate($bookingRequestCollection);
 
-        return new CalculateStatsResponse(
-            $statsResume->avg(),
-            $statsResume->min(),
-            $statsResume->max()
-        );
-    }
+		return new CalculateStatsResponse($statsResume->avg(), $statsResume->min(), $statsResume->max());
+	}
 }

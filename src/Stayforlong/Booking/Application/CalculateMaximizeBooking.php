@@ -9,23 +9,23 @@ use Stayforlong\Booking\Domain\MaximizeCalculator;
 
 final readonly class CalculateMaximizeBooking
 {
-    public function __construct(
-        private BookingRequestCollectionFactory $bookingCollectionFactory,
-        private MaximizeCalculator $calculator
-    ) { }
+	public function __construct(
+		private BookingRequestCollectionFactory $bookingCollectionFactory,
+		private MaximizeCalculator $calculator
+	) {}
 
-    public function __invoke(array $bookingRequests): CalculateMaximizeBookingResponse
-    {
-        $bookingCollection = $this->bookingCollectionFactory->createFromData($bookingRequests);
+	public function __invoke(array $bookingRequests): CalculateMaximizeBookingResponse
+	{
+		$bookingCollection = $this->bookingCollectionFactory->createFromData($bookingRequests);
 
-        $stats = $this->calculator->calculate($bookingCollection);
+		$stats = $this->calculator->calculate($bookingCollection);
 
-        return new CalculateMaximizeBookingResponse(
-            $stats->requestsIds(),
-            $stats->totalProfit(),
-            $stats->avgNight(),
-            $stats->minNight(),
-            $stats->maxNight()
-        );
-    }
+		return new CalculateMaximizeBookingResponse(
+			$stats->requestsIds(),
+			$stats->totalProfit(),
+			$stats->avgNight(),
+			$stats->minNight(),
+			$stats->maxNight()
+		);
+	}
 }

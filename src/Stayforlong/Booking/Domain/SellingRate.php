@@ -6,7 +6,4 @@ namespace Stayforlong\Booking\Domain;
 
 use Stayforlong\Shared\Types\Domain\Scalar\NaturalInteger;
 
-final class SellingRate extends NaturalInteger
-{
-
-}
+final class SellingRate extends NaturalInteger {}

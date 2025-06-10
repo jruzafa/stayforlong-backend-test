@@ -5,36 +5,36 @@ declare(strict_types=1);
 namespace Stayforlong\Booking\Domain;
 
 use DateMalformedStringException;
+use DateTimeImmutable;
 use DateTimeZone;
+use InvalidArgumentException;
 
-final class CheckIn extends \DateTimeImmutable
+final class CheckIn extends DateTimeImmutable
 {
-    public function __construct(
-        string $datetime = "now",
-        ?DateTimeZone $timezone = null)
-    {
-        $this->guard($datetime);
+	public function __construct(string $datetime = 'now', ?DateTimeZone $timezone = null)
+	{
+		$this->guard($datetime);
 
-        parent::__construct($datetime, $timezone);
-    }
+		parent::__construct($datetime, $timezone);
+	}
 
-    /**
-     * @throws DateMalformedStringException
-     */
-    private function guard(string $datetime): void
-    {
-        $checkIn = new \DateTimeImmutable($datetime);
+	/**
+	 * @throws DateMalformedStringException
+	 */
+	private function guard(string $datetime): void
+	{
+		$checkIn = new DateTimeImmutable($datetime);
 
-        if ($checkIn < new \DateTimeImmutable()) {
-            throw new \InvalidArgumentException('CheckIn date must be greater than today');
-        }
-    }
+		if ($checkIn < new DateTimeImmutable()) {
+			throw new InvalidArgumentException('CheckIn date must be greater than today');
+		}
+	}
 
-    /**
-     * @throws DateMalformedStringException
-     */
-    public static function createFromString(string $value): CheckIn
-    {
-        return new CheckIn($value);
-    }
+	/**
+	 * @throws DateMalformedStringException
+	 */
+	public static function createFromString(string $value): self
+	{
+		return new self($value);
+	}
 }
