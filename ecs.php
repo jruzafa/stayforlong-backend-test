@@ -2,6 +2,7 @@
 
 use CodelyTv\CodingStyle;
 use PhpCsFixer\Fixer\ClassNotation\FinalClassFixer;
+use PhpCsFixer\Fixer\ClassNotation\SelfStaticAccessorFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return function (ECSConfig $ecsConfig): void {
@@ -13,7 +14,7 @@ return function (ECSConfig $ecsConfig): void {
         FinalClassFixer::class => [
             __DIR__ . '/src/Shared/Types/Domain/',
         ],
-        \PhpCsFixer\Fixer\ClassNotation\SelfStaticAccessorFixer::class => [
+        SelfStaticAccessorFixer::class => [
             __DIR__ . '/src/Shared/Types/Domain/',
         ],
     ]);

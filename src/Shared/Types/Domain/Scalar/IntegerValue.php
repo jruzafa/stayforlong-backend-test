@@ -18,7 +18,7 @@ class IntegerValue
 
 	public static function createFromInt(int $value)
 	{
-        return new static($value);
+		return new static($value);
 	}
 
 	public function value(): int
@@ -26,14 +26,14 @@ class IntegerValue
 		return $this->value;
 	}
 
-    protected function guard(int $value): void
+	protected function guard(int $value): void
 	{
 		Assert::integer($value, 'It\'s not integer value');
 	}
 
 	public static function random(): static
 	{
-        return new static(self::randomValue());
+		return new static(self::randomValue());
 	}
 
 	protected static function randomValue(): int

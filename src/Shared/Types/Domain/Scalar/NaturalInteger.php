@@ -15,7 +15,7 @@ class NaturalInteger extends IntegerValue
 
 	public static function random(): static
 	{
-        return new static(static::randomValue());
+		return new static(static::randomValue());
 	}
 
 	protected function guard(int $value): void

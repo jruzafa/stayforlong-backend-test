@@ -36,7 +36,7 @@ abstract class StringValue
 		return new static($value);
 	}
 
-    public static function random(): StringValue
+	public static function random(): self
 	{
 		return new static(static::randomValue());
 	}

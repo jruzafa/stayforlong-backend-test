@@ -68,3 +68,7 @@ install: ## Install dependencies
 .PHONY: test
 test: ## Execute unit test
 	$(DOCKER_COMPOSE_RUN) php bin/phpunit
+
+.PHONY: ecs
+ecs: ## Run ecs
+	$(DOCKER_COMPOSE_RUN) ./vendor/bin/ecs check --fix
