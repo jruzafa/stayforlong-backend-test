@@ -2,8 +2,8 @@ name: CI
 
 on: [push, pull_request]
 jobs:
-  run-test:
-    name: Run testsuite
+  setup_php:
+    name: Setup PHP
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +23,11 @@ jobs:
           composer-options: "--no-progress --optimize-autoloader --no-scripts"
           custom-cache-key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
+  run-test:
+    name: Run testsuite
+    runs-on: ubuntu-latest
+    needs: setup_php
+    steps:
       - name: Run Unit test
         run: vendor/bin/phpunit --testsuite Unit
 
@@ -32,7 +37,7 @@ jobs:
   lint:
     name: Lint code
     runs-on: ubuntu-latest
-
+    needs: setup_php
     steps:
-      - name: Easy Coding Standard Action
-        uses: zingimmick/ecs-action@0.0.6
+      - name: Run ECS
+        run: vendor/bin/ecs check
