@@ -16,7 +16,7 @@ services:
       - ${APP_CODE_PATH}:${APP_WEB_ROOT}
     environment:
       - PHP_IDE_CONFIG=serverName=sfl.test
-      - PHP_XDEBUG_MODE=${XDEBUG_MODE:-off}
+      - PHP_XDEBUG_MODE=debug,develop,coverage
       - PHP_XDEBUG_REMOTE_HOST=host.docker.internal
   nginx:
     container_name: sfl-nginx

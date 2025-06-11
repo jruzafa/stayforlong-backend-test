@@ -80,20 +80,11 @@ final class BookingCollectionMother
 
         $bookingCollection->add(
             BookingMother::create(
-                RequestId::create('acme_AAAAA'),
-                CheckIn::createFromString('2026-01-10'),
+                RequestId::create('atropote_AA930'),
+                CheckIn::createFromString('2026-01-04'),
                 Nights::createFromInt(4),
-                SellingRate::createFromInt(160),
-                Margin::createFromInt(30)
-            )
-        );
-        $bookingCollection->add(
-            BookingMother::create(
-                RequestId::create('bookata_XY123'),
-                CheckIn::createFromString('2026-01-01'),
-                Nights::createFromInt(5),
-                SellingRate::createFromInt(200),
-                Margin::createFromInt(20)
+                SellingRate::createFromInt(150),
+                Margin::createFromInt(6)
             )
         );
         $bookingCollection->add(
@@ -107,13 +98,24 @@ final class BookingCollectionMother
         );
         $bookingCollection->add(
             BookingMother::create(
-                RequestId::create('atropote_AA930'),
-                CheckIn::createFromString('2026-01-04'),
-                Nights::createFromInt(4),
-                SellingRate::createFromInt(150),
-                Margin::createFromInt(6)
+                RequestId::create('bookata_XY123'),
+                CheckIn::createFromString('2026-01-01'),
+                Nights::createFromInt(5),
+                SellingRate::createFromInt(200),
+                Margin::createFromInt(20)
             )
         );
+        $bookingCollection->add(
+            BookingMother::create(
+                RequestId::create('acme_AAAAA'),
+                CheckIn::createFromString('2026-01-10'),
+                Nights::createFromInt(4),
+                SellingRate::createFromInt(160),
+                Margin::createFromInt(30)
+            )
+        );
+
+
 
         return $bookingCollection;
     }

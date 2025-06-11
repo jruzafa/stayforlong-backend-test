@@ -1,0 +1,33 @@
+{
+    "commit-msg": {
+        "enabled": false,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+                "options": {
+                    "subjectLength": 50,
+                    "bodyLineLength": 72
+                }
+            }
+        ]
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "bin/phpunit"
+            },
+            {
+                "action": "vendor/bin/ecs check --fix"
+            }
+        ]
+    },
+    "config": {
+        "run": {
+            "mode": "docker",
+            "exec": "docker compose --project-name sfl run --rm php",
+            "path": "./vendor/bin/captainhook",
+            "git": "/docker/.git"
+        }
+    }
+}
