@@ -28,3 +28,6 @@ jobs:
 
       - name: Run Acceptance test
         run: vendor/bin/phpunit --testsuite Acceptance
+
+      - name: Easy Coding Standard Action
+        uses: zingimmick/ecs-action@0.0.4
