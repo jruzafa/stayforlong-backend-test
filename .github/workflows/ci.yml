@@ -29,5 +29,10 @@ jobs:
       - name: Run Acceptance test
         run: vendor/bin/phpunit --testsuite Acceptance
 
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Easy Coding Standard Action
         uses: zingimmick/ecs-action@0.0.4
