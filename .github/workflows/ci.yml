@@ -35,4 +35,4 @@ jobs:
 
     steps:
       - name: Easy Coding Standard Action
-        uses: zingimmick/ecs-action@0.0.4
+        uses: zingimmick/ecs-action@0.0.6
