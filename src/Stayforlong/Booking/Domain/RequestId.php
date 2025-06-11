@@ -21,8 +21,8 @@ final class RequestId extends StringValue
 	public static function randomValue(): string
 	{
 		$letters = 'abcdefghijklmnopqrstuvwxyz';
-		$prefix = '';
-		$max = strlen($letters) - 1;
+		$prefix  = '';
+		$max     = strlen($letters) - 1;
 
 		for ($i = 0; $i < rand(5, 10); $i++) {
 			$prefix .= $letters[rand(0, $max)];
@@ -32,7 +32,7 @@ final class RequestId extends StringValue
 
 		$firstSuffix = $letters[rand(0, $max)] . $letters[rand(0, $max)];
 
-		$qty = rand(2, 3);
+		$qty    = rand(2, 3);
 		$suffix = '';
 
 		for ($i = 0; $i < $qty; $i++) {

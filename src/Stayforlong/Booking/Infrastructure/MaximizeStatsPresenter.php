@@ -11,7 +11,7 @@ final readonly class MaximizeStatsPresenter
 	public function toArray(): array
 	{
 		return [
-			'request_ids' => $this->bookingRequestIds,
+			'request_ids'  => $this->bookingRequestIds,
 			'total_profit' => $this->totalProfit,
 		];
 	}

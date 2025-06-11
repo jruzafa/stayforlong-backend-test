@@ -27,8 +27,8 @@ final class GetMaximizeBookingController
 		LoggerInterface $logger,
 	) {
 		$this->maximizeCalculatorUseCase = $maximizeCalculator;
-		$this->statsRequestValidator = $statsRequestValidator;
-		$this->logger = $logger;
+		$this->statsRequestValidator     = $statsRequestValidator;
+		$this->logger                    = $logger;
 	}
 
 	public function __invoke(Request $request): Response

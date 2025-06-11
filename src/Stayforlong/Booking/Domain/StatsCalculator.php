@@ -9,8 +9,8 @@ final readonly class StatsCalculator
 	public function calculate(BookingRequestCollection $bookingRequestCollection): StatsResume
 	{
 		$totalProfit = 0;
-		$min = PHP_INT_MAX;
-		$max = 0;
+		$min         = PHP_INT_MAX;
+		$max         = 0;
 
 		/** @var BookingRequest $booking */
 		foreach ($bookingRequestCollection as $booking) {

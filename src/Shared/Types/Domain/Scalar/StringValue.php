@@ -44,7 +44,7 @@ abstract class StringValue
 	public static function randomValue(): string
 	{
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$randValue = '';
+		$randValue  = '';
 
 		for ($i = 0; $i < rand(5, 10); $i++) {
 			$range = rand(0, strlen($characters) - 1);

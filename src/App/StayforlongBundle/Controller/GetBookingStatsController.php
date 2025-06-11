@@ -27,7 +27,7 @@ final class GetBookingStatsController
 	) {
 		$this->calculateStatsUseCase = $calculateStatsUseCase;
 		$this->statsRequestValidator = $statsRequestValidator;
-		$this->logger = $logger;
+		$this->logger                = $logger;
 	}
 
 	public function __invoke(Request $request): Response
